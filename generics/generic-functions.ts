@@ -6,7 +6,7 @@ const res1=merge({a:1}, {b:2});
 console.log(res1.a); // 1
 const res2=merge({a:1, b:3}, {c:2});
 console.log(res2.b); // 3
-const res3=merge({a:1, b:3},30); // It works but 30 can't be merged with first object and we can't access
+const res3=merge({a:1, b:3},30); // It works but 30 can't be merged with object and we can't access it.
 const res5=merge<{a:number}, {b:string}>({a:1}, {b:'string'});  // We can mention the generic type but it is redundant
 
 // With constraints
