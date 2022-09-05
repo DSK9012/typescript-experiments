@@ -33,9 +33,11 @@ function sum(a:number, b:number){
 sum(1,2); // 3
 sum('1','2'); // We can't pass string parameters here.
 // See the benefit here. It gives clear idea about the function inputs and outputs to the developer.
+// Note: FYI, Don't open both JS and TS files(same) in IDE, TS will yell at us with some unwanted errors. 
 ```
 
 Below are the features. ⭐ the repo, It might help you.
 
+* [Basics](https://github.com/DSK9012/typescript-experiments/blob/main/typescript-basics/typescript-basics.md)
 * [Generics](https://github.com/DSK9012/typescript-experiments/blob/main/generics/generics.md)  
 
