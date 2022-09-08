@@ -63,3 +63,35 @@ x=['s', 9]
 console.log(x);
 x[1]=2;
 console.log(x);
+
+function printResult1(){ // undefined
+  while(true){}
+  // throw 'ee';
+  // return undefined;
+}
+console.log(printResult1())
+function printResult2(){ // undefined
+  return;
+}
+function printResult3(){ // null
+  return null;
+}
+function printResult4():null{ // void
+  return null;
+}
+
+function addAndHandle(n1:number,n2:number, cb:(num:number)=>void){
+  cb(n1+n2);
+}
+
+addAndHandle(1, 2, (num)=>{ 
+  return num;
+});
+
+let userInput:unknown;
+let userName:string;
+
+userInput=1;
+userInput='string';
+
+userName=userInput as string;

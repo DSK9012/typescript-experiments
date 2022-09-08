@@ -1,6 +1,8 @@
 # **Typescript Basics**
 
-* Core Types  
+- [Core Types][Core Types]
+
+## **Core Types**  
 
 |Type|Description|Example|  
 |-|-|-|
@@ -24,7 +26,7 @@
 const a=10; //  10
 let a=10; // number
 
-// Explicitly defining the type in assignment is redundant. We can depend on typescript inference here. 🟥
+// Explicitly defining the type in assignment is redundant. We can depend on typescript inference here.
 const a:number=10; // 10
 let a:number=10; // number
 
@@ -42,13 +44,13 @@ const a={ // {b:number, c:string}
   c:'string',
 };
 
-// Explicitly defining the object type 🟥
+// Explicitly defining the object type
 const a:object = { // Type is object onlu but we will get error when accessing members b or c. Because typescript doesn't know what is defined exactly in this object type. 
   b:1,
   c:'string',
 };
 
-// Here we defined the type explicitly with content. But this is redundant. 🟥
+// Here we defined the type explicitly with content. But this is redundant.
 const a:{
   b:number;
   c:string;
@@ -83,7 +85,7 @@ let arr:Array<string>=[];
 const arr:Array<string>=[];
 var arr:Array<string>=[];
 
-// Wrong approach 🟥
+// Wrong approach
 let arr:Array<string>; // string[]
 arr.push('string'); // Throws error. Remember, In javascript we can't use variables before assignment. 
 
@@ -118,7 +120,7 @@ enum Role { PRIMARY_ADMIN, ADMIN, BUYER }; // By default, Typescript treat PRIMA
 enum Role { PRIMARY_ADMIN="PRIMARY_ADMIN", ADMIN=0, BUYER=1 }; // We can assign any value though.
 enum Role { PRIMARY_ADMIN="PRIMARY_ADMIN", ADMIN=true, BUYER={a:1}, NORMAL_USER:[1] }; // Throws error. Remember, We can't use computed(booleans, objects and arrays) values in enums. 🟥
 
-// Wrong approach 🟥
+// Wrong approach
 const PRIMARY_ADMIN="PRIMARY_ADMIN";
 const ADMIN="ADMIN";
 const BUYER="BUYER";
@@ -187,4 +189,130 @@ type CustomType={
   a:string;
   b:number;
 };
+```
+
+* Function Types
+```ts
+function add(n1:number, n2:number):number{ // number - Explicitly mentioning the return type.
+  return n1+n2;
+}
+
+function add(n1:number, n2:number){ // number - Return type of function is inferred by typescript.
+  return n1+n2;
+}
+
+function add(n1:number, n2:number){ // string - Return type of function is inferred by typescript.
+  return n1.toString()+n2.toString();
+}
+
+function printResult(n:number){ // void 
+  console.log('Result:', n);
+}
+
+console.log(printResult(add(1,2))); // undefined - bcoz function is not return anything in which case JS will treat it as undefined when we are trying to access something which isn't defined. But typescript will treat as its returning void(JS don't know this void type).
+
+// OBSERVE BELOW.
+// void
+function justAFunction(){ // void ✅ 
+}
+console.log(justAFunction()); // undefined
+
+function justAFunction(){ // void ✅ 
+return;
+}
+console.log(justAFunction()); // undefined
+
+function justAFunction(){ // void ✅ 
+  throw 'Error';
+}
+
+function justAFunction(){ // void ✅ 
+  while(true){}
+}
+
+function justAFunction():void{ // void ✅ 
+}
+console.log(justAFunction()); // undefined
+
+function justAFunction():void{ // void ✅ 
+return undefined;
+}
+console.log(justAFunction()); // undefined
+
+// any
+function justAFunction():any{ // any ✅ 
+}
+console.log(justAFunction()); // undefined
+
+function justAFunction():any{ // any ✅ 
+return;
+}
+console.log(justAFunction()); // undefined
+
+function justAFunction():any{ // any ✅ 
+return undefined;
+}
+console.log(justAFunction()); // undefined
+
+// undefined
+function justAFunction():undefined{ // undefined ✅ 
+return;
+}
+console.log(justAFunction()); // undefined
+
+function justAFunction():undefined{ // undefined ✅ 
+return undefined;
+}
+console.log(justAFunction()); // undefined
+
+function justAFunction():undefined{ // undefined - Throws error 🟥 
+}
+
+// null
+function justAFunction():null{ // null  ✅ 
+return null;
+}
+console.log(justAFunction()); // undefined
+
+function justAFunction():null{ // null - Throws error 🟥 
+}
+
+// never
+function justAFunction():never{ // never ✅ 
+  throw 'Error';
+}
+
+function justAFunction():never{ // never ✅ 
+  while(true){}
+}
+
+function justAFunction():never{ // never- Throws error 🟥 
+  while(1>0){}
+}
+
+// Function as Type
+let printResult:Fucntion; // Not recommended
+let printResult:(n:number)=>void; // Recommended
+
+// Callback Function
+function addAndHandle(n1:number,n2:number, cb:(num:number)=>void){ // When we are not interested in the return type of this callback function we can use void return type.
+  cb(n1+n2);
+}
+
+addAndHandle(1, 2, (num)=>{ // Here we don't need to explicitly define the type for . Typescript implicitly does that.
+  // Here we don't need to return anything. And even if we return anything typescript won't throw error in this case like callback function. It mostly care about the parameter types here.
+  return num;
+});
+```
+
+* unknown type
+```ts
+let userInput:unknown; // It is better to use 'unknown' than 'any' type.
+let userName:string;
+
+userInput=1;
+userInput='string';
+
+userName=userInput; // 🟥
+userName=userInput as string; ✅
 ```

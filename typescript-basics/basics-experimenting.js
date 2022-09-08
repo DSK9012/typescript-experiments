@@ -48,3 +48,15 @@ x = ['s', 9];
 console.log(x);
 x[1] = 2;
 console.log(x);
+function printResult1() {
+}
+console.log(printResult1());
+function printResult2() {
+    return;
+}
+function printResult3() {
+    return null;
+}
+function printResult4() {
+    return null;
+}
