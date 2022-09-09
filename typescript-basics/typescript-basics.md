@@ -1,6 +1,16 @@
 # **Typescript Basics**
 
-- [Core Types][Core Types]
+- [Core Types](#core-types)
+- [Inference](#inference)
+- [Object Types](#object-types)
+- [Array Types](#array-types)
+- [Tuple Types](#tuple-types)
+- [Enum Types](#enum-types)
+- [Any Types](#any-type)
+- [Union & Literal Types](#union--literal-types)
+- [Type Aliases](#type-aliases---only-support-in-ts)
+- [Function Types](#function-types)
+- [Unknown type](#unknown-type)
 
 ## **Core Types**  
 
@@ -20,7 +30,7 @@
 🟥 - Not Recommended
   
 
-* Inference
+### **Inference**
 ```ts
 // By default typescript implicitly infers the type of value in any assignment. ✅
 const a=10; //  10
@@ -36,7 +46,7 @@ a=10;
 a='string'; // Throws error 
 ```
 
-* Object Types 
+### **Object Types**
 ```ts
 // Typescript infers the object type here ✅
 const a={ // {b:number, c:string}
@@ -60,7 +70,7 @@ const a:{
 };
 ```
 
-* Array Types
+### **Array Types**
 ```ts
 let arr=[]; //  any[]
 const arr=[]; //  never[]
@@ -94,7 +104,7 @@ let arr:Array<string>=[]; // string[]
 arr.push('string');
 ```
 
-* Tuple Types
+### **Tuple Types**
 ```ts
 let arr:[string, number]=['string',1]; // [string, number]
 const arr:[string, number]=['string',1]; // [string, number]
@@ -113,7 +123,7 @@ arr[1]='string'; // Throws error
 arr[2]=2; // Throws error
 ```
 
-* Enum Types
+### **Enum Types**
 ```ts
 // When we want to define any identifiers we can use enum.
 enum Role { PRIMARY_ADMIN, ADMIN, BUYER }; // By default, Typescript treat PRIMARY_ADMIN as 0, ADMIN as 1 and follows.
@@ -138,7 +148,7 @@ const user={
 };
 ```
 
-* Any Type
+### **Any Type**
 ```ts
 // Defining with any is not recommended for good pratice since its allowed to assign any shit.
 let any:any=[]; // FYI, Here we can declare a variable with name 'any' since its not a type in JS. But we can't declare like String, Number, etc.
@@ -149,7 +159,7 @@ any={a:1};
 any=false;
 ```
 
-* Union & Literal Types
+### **Union & Literal Types**
 ```ts
 // Union Type
 let union:string | number='string'; // string | number
@@ -175,7 +185,7 @@ const a=1; // 1
 const a=1.4; // 1.4
 ```
 
-* Type Aliases - only support in TS
+### **Type Aliases - only support in TS**
 ```ts
 type CustomType=any;
 type CustomType=number;
@@ -191,7 +201,7 @@ type CustomType={
 };
 ```
 
-* Function Types
+### **Function Types**
 ```ts
 function add(n1:number, n2:number):number{ // number - Explicitly mentioning the return type.
   return n1+n2;
@@ -305,7 +315,7 @@ addAndHandle(1, 2, (num)=>{ // Here we don't need to explicitly define the type 
 });
 ```
 
-* unknown type
+### **Unknown type**
 ```ts
 let userInput:unknown; // It is better to use 'unknown' than 'any' type.
 let userName:string;
